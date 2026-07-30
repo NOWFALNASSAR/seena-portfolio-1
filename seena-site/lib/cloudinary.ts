@@ -50,6 +50,7 @@ export async function getMediaForSection(section: Section): Promise<MediaItem[]>
         createdAt: r.created_at,
       }))
       .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
+  } catch (err) {
     // No assets tagged yet, or Cloudinary not configured — fail soft.
     console.error(`Cloudinary fetch failed for section "${section}":`, err);
     return [];
