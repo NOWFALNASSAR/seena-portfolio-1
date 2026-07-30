@@ -42,8 +42,7 @@ export async function getMediaForSection(section: Section): Promise<MediaItem[]>
     });
     const all = [...(result.resources || []), ...(videos.resources || [])];
     return all
-      .map((r: any): MediaItem => ({ (just adding ": MediaItem" right after "(r: any)")
-      
+      .map((r: any): MediaItem => ({
         publicId: r.public_id,
         url: r.secure_url,
         resourceType: r.resource_type === "video" ? "video" : "image",
@@ -51,7 +50,6 @@ export async function getMediaForSection(section: Section): Promise<MediaItem[]>
         createdAt: r.created_at,
       }))
       .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
-  } catch (err) {
     // No assets tagged yet, or Cloudinary not configured — fail soft.
     console.error(`Cloudinary fetch failed for section "${section}":`, err);
     return [];
