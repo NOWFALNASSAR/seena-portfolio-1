@@ -42,7 +42,7 @@ export async function getMediaForSection(section: Section): Promise<MediaItem[]>
     });
     const all = [...(result.resources || []), ...(videos.resources || [])];
     return all
-      .map((r: any): MediaItem => ({
+      .map((r: any) => ({
         publicId: r.public_id,
         url: r.secure_url,
         resourceType: r.resource_type === "video" ? "video" : "image",
