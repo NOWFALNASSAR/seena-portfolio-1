@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifySessionToken, SESSION_COOKIE } from "@/lib/auth";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Let the login page and login API route through untouched.
@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
 
   if (isProtectedPage || isProtectedApi) {
     const token = request.cookies.get(SESSION_COOKIE)?.value;
-    const valid = verifySessionToken(token);
+    const valid = await verifySessionToken(token);
 
     if (!valid) {
       if (isProtectedApi) {
